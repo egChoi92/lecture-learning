@@ -1,0 +1,18 @@
+{
+  "name": "week01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ex01_hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "serve-static": "^1.14.1"
+  },
+  "devDependencies": {}
+}
