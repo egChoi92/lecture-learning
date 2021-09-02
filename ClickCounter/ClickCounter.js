@@ -7,6 +7,7 @@ App.ClickCounter = () => {
     getValue() {
       return value
     },
+    
     increase() {
       value++;
     }
