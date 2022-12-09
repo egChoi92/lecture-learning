@@ -1,15 +1,13 @@
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({list}) => {
-    console.log(list);
-
+const DiaryList = ({diaryList, onRemove, onEdit}) => {
     return (
         <div className="DiaryList">
             <h1>일기 리스트</h1>
-            <p>{list.length}개의 일기가 있습니다</p>
+            <p className="notice">{diaryList.length}개의 일기가 있습니다</p>
             <ul>
-                {list.map((item, index) => (
-                    <DiaryItem key={item.id} {...item} />
+                {diaryList.map((item, index) => (
+                    <DiaryItem key={item.id} {...item} onRemove={onRemove} onEdit={onEdit} />
                 ))}
             </ul>
         </div>
@@ -17,7 +15,7 @@ const DiaryList = ({list}) => {
 };
 
 DiaryList.defaultProps = {
-    list: [
+    diaryList: [
         
     ]
 }
