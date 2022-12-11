@@ -6,7 +6,8 @@
 
 .App {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: flex-start;
   width: 90%;
   height: 90vh;
   margin: 5vh auto;
@@ -56,8 +57,6 @@
 
 .DiaryEditor {
   position: relative;
-  min-height: 440px;
-  height: 50%;
   padding-bottom: 40px;
   text-align: center;
 }
