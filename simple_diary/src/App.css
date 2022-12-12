@@ -7,7 +7,6 @@
 .App {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   width: 90%;
   height: 90vh;
   margin: 5vh auto;
@@ -19,6 +18,7 @@
   text-align: center;
 }
 
+
 .App input, 
 .App textarea {
   width: 100%;
@@ -26,6 +26,10 @@
   border: none;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
+}
+
+.App ul {
+  list-style: none;
 }
 
 
@@ -42,6 +46,15 @@
   font-size: 20px;
   font-weight: 700;
   color: #fff;
+}
+
+.App .total {
+  margin: 20px;
+  padding: 10px 20px;
+  border: 1px solid #efefef;
+  background: #f9f9f9;
+  font-size: 12px;
+  line-height: 1.75;
 }
 
 .DiaryEditor,
@@ -103,7 +116,6 @@
   padding: 15px;
   background-color: #f8f8f8;
   text-align: left;
-  list-style: none;
 }
 .DiaryItem + .DiaryItem {
   margin-top: 20px;
