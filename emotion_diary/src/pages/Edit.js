@@ -1,25 +1,14 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Edit = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const id = searchParams.get("id");
-  console.log("id: ", id);
+  const {id} = useParams()
 
-  const mode = searchParams.get("mode");
-  console.log("mode: ", mode);
-
-  const navigate = useNavigate();
 
   return (
     <div className="">
       <h2>Edit</h2>
-      <p>일기 수정 페이지</p>
-      <button onClick={() => setSearchParams({ who: "egChoi" })}>
-        Query String Update
-      </button>
-      <button onClick={() => navigate("/")}>Go Home</button>
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <p>{id}번째 일기 수정 페이지</p>
     </div>
   );
 };
