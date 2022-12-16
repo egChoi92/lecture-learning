@@ -15,6 +15,20 @@ body {
   font-family: 'Nanum Pen Script', cursive; 
 }
 
+button,
+textarea,
+input[type=date] {
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  font-size: 20px;
+  font-family: 'Nanum Pen Script', cursive; 
+}
+
+textarea::placeholder {
+  font-size: 20px;
+}
+
 #root {
   background-color: #fff;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -125,23 +139,28 @@ header > div {
   cursor: pointer;
 }
 
-.DiaryItem .emotion--1 {
+.DiaryItem .emotion--1,
+.EmotionItem--1.focus {
   background-color: #64c964;
 }
 
-.DiaryItem .emotion--2 {
+.DiaryItem .emotion--2,
+.EmotionItem--2.focus {
   background-color: #9dd772;
 }
 
-.DiaryItem .emotion--3 {
+.DiaryItem .emotion--3,
+.EmotionItem--3.focus {
   background-color: #fdce17;
 }
 
-.DiaryItem .emotion--4 {
+.DiaryItem .emotion--4,
+.EmotionItem--4.focus {
   background-color: #fd8446;
 }
 
-.DiaryItem .emotion--5 {
+.DiaryItem .emotion--5,
+.EmotionItem--5.focus {
   background-color: #fd565f;
 }
 
@@ -168,4 +187,65 @@ header > div {
 
 .DiaryItem .button {
   min-width: 70px;
+}
+
+/* DiaryEditor */
+.DiaryEditor {
+
+}
+
+.DiaryEditor section {
+  margin-bottom: 40px;
+}
+
+.DiaryEditor h2 {
+  margin: 20px 0 15px;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.DiaryEditor .input-date {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.DiaryEditor .emotion-list {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 2%;
+}
+
+.DiaryEditor textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
+  resize: vertical;
+}
+
+.DiaryEditor .control-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.EmotionItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.EmotionItem.focus {
+  color: #fff;
+}
+
+.EmotionItem img {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.EmotionItem span {
+  font-size: 16px;
 }
