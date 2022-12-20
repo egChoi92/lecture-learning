@@ -21,9 +21,10 @@ const reducer = (state, action) => {
       break;
     }
     case "EDIT": {
-      newState = state.map((item) =>
-        item.id === action.data.id ? { ...action.data } : item,
-      );
+      newState = state.map((item) => {
+        return item.id === action.data.id ? { ...action.data } : item;         
+        
+      });
       break;
     }
     default:
@@ -94,7 +95,7 @@ function App() {
     dispatch({
       type: "EDIT",
       data: {
-        id: dataId.current,
+        id: targetId,
         date: new Date(date).getTime(),
         content,
         emotion,

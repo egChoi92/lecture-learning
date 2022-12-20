@@ -139,27 +139,27 @@ header > div {
   cursor: pointer;
 }
 
-.DiaryItem .emotion--1,
+.emotion--1,
 .EmotionItem--1.focus {
   background-color: #64c964;
 }
 
-.DiaryItem .emotion--2,
+.emotion--2,
 .EmotionItem--2.focus {
   background-color: #9dd772;
 }
 
-.DiaryItem .emotion--3,
+.emotion--3,
 .EmotionItem--3.focus {
   background-color: #fdce17;
 }
 
-.DiaryItem .emotion--4,
+.emotion--4,
 .EmotionItem--4.focus {
   background-color: #fd8446;
 }
 
-.DiaryItem .emotion--5,
+.emotion--5,
 .EmotionItem--5.focus {
   background-color: #fd565f;
 }
@@ -248,4 +248,55 @@ header > div {
 
 .EmotionItem span {
   font-size: 16px;
+}
+
+/* Diary */
+.DiaryPage article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.DiaryPage article + article {
+  margin-top: 100px;
+}
+
+.DiaryPage h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 22px;  
+}
+
+.DiaryPage .emotion {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.DiaryPage .emotion__descript {
+  font-size: 25px;
+  color: #fff;
+}
+
+.DiaryPage .content {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #ececec;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.DiaryPage .content__descript {
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+  font-family: 'Yeon Sung';
+  font-weight: 400;
+  line-height: 2.5;
 }

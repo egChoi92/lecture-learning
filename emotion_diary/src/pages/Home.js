@@ -29,11 +29,9 @@ const Home = () => {
     }, [diaryList, currentDate]);
 
     useEffect(() => {
-        console.log(data);
     }, [data])
 
     const increaseMonth = () => {
-        console.log('currentDate: ', currentDate);
         setCurrnetDate(
         new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate()),
         
