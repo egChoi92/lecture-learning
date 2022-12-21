@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DiaryDispatchContext } from './../App';
 import MyHeader from './MyHeader';
@@ -13,11 +13,11 @@ const DiaryEditor = ({isEdit, originData}) => {
     const [date, setDate] = useState(getStringDate(new Date()));
 
     const [emotion, setEmotion] = useState(3);
-    const handleClickEmotion = (emotion) => {
+    const handleClickEmotion = useCallback((emotion) => {
         setEmotion(emotion)
-    }
+    },[])
 
-    const {onCreate, onEdit} = useContext(DiaryDispatchContext);
+    const {onCreate, onEdit, onRemove} = useContext(DiaryDispatchContext);
     const contentRef = useRef();
     const [content, setContent] = useState();
 
@@ -39,9 +39,17 @@ const DiaryEditor = ({isEdit, originData}) => {
         navigate('/', {replace: true})
     }
 
+    const handleRemove = () => {
+        if (window.confirm('정말 삭제하시겠습니까?')) {
+            onRemove(originData.id)
+            navigate('/', {replace: true})
+        }
+    }
+
     useEffect(() => {
         if(isEdit) {
             setDate(getStringDate(new Date(parseInt(originData.date))))
+            
             setEmotion(originData.emotion)
             setContent(originData.content)
         }
@@ -52,6 +60,9 @@ const DiaryEditor = ({isEdit, originData}) => {
             <MyHeader
                 leftChild={<MyButton text={'< 뒤로가기'} onClick={() => navigate(-1)}/>}
                 headerText={isEdit ? '일기 수정하기' : '새 일기 쓰기'}
+                rightChild={
+                    isEdit && <MyButton type={'negative' }text={'삭제하기'} onClick={handleRemove}/>
+                }
              />
              <section className="">
                 <h2>오늘은 언제인가요?</h2>
@@ -78,7 +89,7 @@ const DiaryEditor = ({isEdit, originData}) => {
                 </div>
              </section>
              <section className="">
-                <h2>오늘의 이길</h2>
+                <h2>오늘의 일기</h2>
                 <div className="textarea-box">
                     <textarea 
                         ref={contentRef}

@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
@@ -17,7 +17,9 @@ const reducer = (state, action) => {
       break;
     }
     case "REMOVE": {
+      console.log('action: ', action);
       newState = state.filter((item) => item.id !== action.targetId);
+      
       break;
     }
     case "EDIT": {
@@ -30,48 +32,29 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  localStorage.setItem('diary', JSON.stringify(newState))
   return newState;
 };
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyDate = [
-  {
-    id: 1,
-    emotion: 1,
-    content: '오늘의 일기 1번',
-    date: 1671013542798,
-  },
-  {
-    id: 2,
-    emotion: 3,
-    content: '오늘의 일기 2번',
-    date: 1671013561445,
-  },
-  {
-    id: 3,
-    emotion: 2,
-    content: '오늘의 일기 3번',
-    date: 1671013561446,
-  },
-  {
-    id: 4,
-    emotion: 5,
-    content: '오늘의 일기 4번',
-    date: 1671013606229,
-  },
-  {
-    id: 5,
-    emotion: 1,
-    content: '오늘의 일기 5번',
-    date: 1671013622117,
-  },
-]
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyDate);
-  const dataId = useRef(0);
+  const [data, dispatch] = useReducer(reducer, []);
+
+  useEffect(() => {
+    const localData = localStorage.getItem('diary');
+    if (localData) {
+      const diaryData = JSON.parse(localData).sort((a, b) => parseInt(b.id) - parseInt(a.id))
+      if (diaryData.length > 0) {
+        dataId.current = parseInt(diaryData[0].id) + 1;
+        dispatch({ type: 'INIT', data: diaryData})
+      }
+    }
+  }, []);
+
+  const dataId = useRef(0)
 
   // CREATE
   const onCreate = (date, content, emotion) => {
@@ -88,7 +71,7 @@ function App() {
   };
   // REMOVE
   const onRemove = (targetId) => {
-    dispatch({ type: "REMOVE", data: targetId });
+    dispatch({ type: "REMOVE", targetId });
   };
   // EDIT
   const onEdit = (targetId, date, content, emotion) => {

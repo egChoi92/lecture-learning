@@ -19,9 +19,12 @@ const Home = () => {
             ).getTime();
     
             const lastDay = new Date(
-                currentDate.getFullYear(),
-                currentDate.getMonth() + 1,
-                0
+                currentDate.getFullYear(),  // 년
+                currentDate.getMonth() + 1, // 월
+                0,                          // 일
+                23,                         // 시
+                59,                         // 분
+                59                          // 초
             ).getTime();
             
             setData(diaryList.filter((item) => firstDay <= item.date && item.date <= lastDay))
