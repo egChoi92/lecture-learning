@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
-import { Menu, Input } from 'antd';
+import Link from 'next/link';
+import { Menu, Input, Button } from 'antd';
 
 const menuItems = [
     {
-        label: '노드버드',
+        label: (
+            <Link href="/">노드버드</Link>    
+        ),
         key: 'home',
     },
     {
-        label: '프로필',
+        label: (
+            <Link href="/profile">프로필</Link>    
+        ),
         key: 'profile',
     },
     {
@@ -25,6 +30,7 @@ const AppLayout = ({ children }) => {
                 mode="horizontal"
                 items={menuItems} 
             />
+            <Link href="/signup"><Button>회원가입</Button></Link>
             {children}
         </div>
     );
