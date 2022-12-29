@@ -1,20 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Button, Checkbox, Form, Input} from 'antd';
-
-const TextInput = React.memo(({type, name, value, onChange}) => {
-    return (
-        <Input type={type} name={name} value={value} required onChange={onChange}  />
-    )
-})
+import TextInput from '../components/TextInput';
+import { useInput } from '../components/CustomHook';
 
 const Signup = () => {
-    const useInput = (initValue = null) => {
-        const [value, setter] = useState(initValue);
-        const handler = useCallback((e) => {
-            setter(e.target.value)
-        }, [])
-        return [value, handler];
-    }
     
     const [id, onChangeId] = useInput('');
     const [name, onChangeName] = useInput('');
@@ -78,7 +67,7 @@ const Signup = () => {
                     <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>동의합니다</Checkbox>
                     {termError && <p style={{ color: 'red'}}>약관에 동의해주세요.</p>}
                 </div>
-                <div style={{ marginTop: 10 }} style={{marginTop: 20}}>
+                <div style={{marginTop: 20}}>
                     <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
             </Form>
