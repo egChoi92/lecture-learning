@@ -1,8 +1,11 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-const PostForm = ({ imagePath }) => {
+const PostForm = () => {
+    const { imagePath } = useSelector(state => state.post);
+    
      return (
         <Form encType="multipart/form-dat" style={{ marginBottom: '20px' }}>
         <Input.TextArea maxLength={140} placehoder="" />

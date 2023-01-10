@@ -3,19 +3,19 @@ import Link from 'next/link';
 import { Button, Form, Row, Col } from 'antd';
 import TextInput from './TextInput';
 import { useInput } from '../components/CustomHook';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../reducers/user';
 
 const LoginForm = () => {
     const [id, onChangeId] = useInput('');
     const [password, onChangePassword] = useInput('');
-    const onSubmit = useCallback(() => {
-        console.log({
-            id,
-            password
-        });
+    const dispatch = useDispatch();
+    const onSubmitForm = useCallback((e) => {
+        dispatch(loginAction)
     }, [id, password])
     return (
         <>
-            <Form onFinish={onSubmit}>
+            <Form onFinish={onSubmitForm}>
                 <Row>
                     <Col xs={8}>
                         <label htmlFor="user-id222">아이디</label>

@@ -2,19 +2,14 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Menu, Input, Button, Row, Col, Form } from 'antd';
+import { useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import LoginForm from './LoginForm';
-import UserProfile from './UserProfile';
+import UserProfile from './userProfile';
 
-const dummy = {
-    name: 'egChoi',
-    post: [],
-    followings: [],
-    followers: [],
-    isLoggedIn: false,
-}
 
 const AppLayout = ({ children }) => {
+    const { isLoggedIn } = useSelector(state => state.user);
     const menuItems = [
         {
             label: (
@@ -44,7 +39,7 @@ const AppLayout = ({ children }) => {
             />
             <Row gutter={10} style={{ padding: '10px'}}>
                 <Col xs={24} md={6}>
-                    {dummy.isLoggedIn 
+                    {isLoggedIn 
                         ? <UserProfile />
                         : <LoginForm />
                     }

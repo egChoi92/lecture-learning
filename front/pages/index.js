@@ -1,28 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
+import { useSelector } from 'react-redux';
 
-const dummy = {
-    isLoggedIn: true,
-    imagePath: [],
-    mainPost: [{
-        createdAt: '',
-        img: 'https://web-resource.gentlemonster.com/assets/stories/bold_collection/img/common/open_graph.jpg',
-        content: '첫 번째 게시글',
-        User: {
-            id: 1,
-            name: 'ChoiEG',
-        }
-    }]
-}
 
 const Home = () => {
+    const { user, isLoggedIn } = useSelector(state => state.user);
+    const { mainPost } = useSelector(state => state.post);
     return (
         <div>
-            {dummy.isLoggedIn && <PostForm imagePath={dummy.imagePath} />}
-            {dummy.mainPost.map((post) => {
+            {isLoggedIn && <PostForm />}
+            {mainPost.map((post, index) => {
                 return (
-                    <PostCard key={+post.createdAt} post={post} />
+                    <PostCard key={index} post={post} />
                 )
             })}
         </div>

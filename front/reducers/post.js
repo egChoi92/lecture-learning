@@ -1,5 +1,13 @@
 export const initialState = {
-    mainPost: [],
+    mainPost: [{
+        img: 'https://web-resource.gentlemonster.com/assets/stories/bold_collection/img/common/open_graph.jpg',
+        content: '첫 번째 게시글',
+        user: {
+            id: 1,
+            name: 'ChoiEG',
+        }
+    },],
+    imagePath: [],
 }
 
 const ADD_POST = 'ADD_POST';
