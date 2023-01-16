@@ -2,11 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types'; 
 import withRedux from 'next-redux-wrapper';
-import AppLayout from '../components/AppLayout'; 
 import { legacy_createStore as createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
+import AppLayout from '../components/AppLayout'; 
 import reducer from '../reducers/index';
 import rootSaga from '../sagas/index';
 
@@ -26,8 +26,8 @@ const NodeBird = ({ Component, store }) => {
 };
 
 NodeBird.propTypes = {
-    Comment: PropTypes.elementType,
-    store: PropTypes.object,
+    Comment: PropTypes.elementType.isRequired,
+    store: PropTypes.object.isRequired,
 }
 
 const configureStore = (initialState, options) => { // initialState: 초기 상태, options: 리덕스 설정
