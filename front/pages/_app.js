@@ -7,8 +7,8 @@ import { legacy_createStore as createStore, compose, applyMiddleware } from 'red
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import reducer from '../reducers';
-import rootSaga from '../sagas';
+import reducer from '../reducers/index';
+import rootSaga from '../sagas/index';
 
 const NodeBird = ({ Component, store }) => {
      return (

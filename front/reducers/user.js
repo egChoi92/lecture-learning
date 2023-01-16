@@ -14,11 +14,11 @@ export const initialState = { // 초기 상태(Store)
 
 
 /* React 의 setState 역할 */
-const LOG_IN = 'LOG_IN'; // 액션의 이름
-const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
-const LOG_OUT = 'LOG_OUT';
-const SIGN_UP = 'SIGN_UP';
+export const LOG_IN = 'LOG_IN'; // 액션의 이름
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_OUT = 'LOG_OUT';
+export const SIGN_UP = 'SIGN_UP';
 
 export const loginAction = {   // 실제 액션
     type: LOG_IN,
