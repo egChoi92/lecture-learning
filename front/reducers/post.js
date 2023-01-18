@@ -2,14 +2,23 @@ export const initialState = {
     mainPost: [{
         User: {
             id: 1,
-            name: 'ChoiEG',
+            nickName: 'ChoiEG',
         },
         content: '첫 번째 게시글',
         img: 'https://web-resource.gentlemonster.com/assets/stories/bold_collection/img/common/open_graph.jpg',
     }],                        // 화면에 보일 포스트들
     imagePath: [],             // 미리보기 이미지 경로
     addPostErrorReason: false, // 포스트 업로드 실패 사유
-    isaAddingPost: false,      // 포스트 업로드 중
+    isAddingPost: false,       // 포스트 업로드 중
+    postAdded: false,          // 포스트 업로드 성공
+}
+
+const dummyPost = {
+    User: {
+        id: 1,
+        nickName: '최은광',
+    },
+    content: '더미 데이터',
 }
 
 export const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
@@ -26,9 +35,9 @@ export const LOAD_USER_POSTS_FAILURE = 'LOAD_USER_POSTS_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
-const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
-const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
-const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
 export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
 export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
@@ -59,6 +68,21 @@ const reducer = (state = initialState, action) => {
         case ADD_POST_REQUEST: 
             return {
                 ...state, 
+                isAddingPost: true,
+                addPostErrorReason: '',
+            }
+        case ADD_POST_SUCCESS: 
+            return {
+                ...state, 
+                isAddingPost: false,
+                postAdded: true,
+                mainPost: [dummyPost, ...state.mainPost]
+            }
+        case ADD_POST_FAILURE: 
+            return {
+                ...state, 
+                isAddingPost: false,
+                addPostErrorReason: action.error
             }
         default:
             return {

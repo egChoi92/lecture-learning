@@ -1,8 +1,9 @@
 const dummyUser = {
-    name: 'egChoi',
+    nickName: 'egChoi',
     post: [],
     followings: [],
     followers: [],
+    id: 1,
 };
 
 /* React 의 state 역할 */
@@ -11,7 +12,7 @@ export const initialState = { // 초기 상태(Store)
     isLoggingOut: false,      // 로그아웃 시도중
     isLoggingIn: false,       // 로그인 시도중
     logInErrorReason: '',     // 로그인 실패 사유
-    signUp: false,            // 회원가입 성공
+    isSignedUp: false,            // 회원가입 성공
     isSigningUp: false,       // 회원가입 시도중
     signUpErrorReason: '',    // 회원가입 실패 사유
     me: null,                 // 내 정보
@@ -61,46 +62,49 @@ export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 // 동기 요청을 위한 액션 -> 리덕스 사용
 export const INCREMTENT_NUMBER = 0;
 
-export const loginAction = data => ({
+/*
+export const loginRequestAction = data => ({
     type: LOG_IN_REQUEST,
     data,
 })
-
-export const logoutAction = {
+export const logoutRequestAction = {
     type: LOG_OUT_REQUEST,
 }
-
-export const signUpAction = data => ({ // action에 넣을 데이터가 동적인 경우, action을 함수로 만든다.
+export const signUpRequestAction = data => ({ // action에 넣을 데이터가 동적인 경우, action을 함수로 만든다.
+    type: SIGN_UP_REQUEST,
+    data: data, 
+})
+export const signUpAction = data => ({ 
     type: SIGN_UP_REQUEST,
     data: data, 
 })
 export const signUpSuccess = {
     type: SIGN_UP_SUCCESS,
 }
-export const signUp = data => ({ 
-    type: SIGN_UP_REQUEST,
-    data: data, 
-})
+*/
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOG_IN_REQUEST:
             return {
                 ...state,  // 기존의 state를 복사   
-                loginData: action.data,
-                isLoading: true,
+                isLoggingIn: true,
+                logInErrorReason: '',
             }
         case LOG_IN_SUCCESS:
             return {
                 ...state,  
+                isLoggingIn: false,
+                isLoading: false,
                 isLoggedIn: true,   
                 me: dummyUser,
-                isLoading: false,
             }
         case LOG_IN_FAILURE:
             return {
                 ...state,  
+                isLoggingIn: false,
                 isLoggedIn: false,
+                logInErrorReason: action.error,
                 me: null,
             }
         case LOG_OUT_REQUEST:
@@ -112,7 +116,21 @@ const reducer = (state = initialState, action) => {
         case SIGN_UP_REQUEST:
             return {
                 ...state,  
-                signUpData: action.data
+                isSigningUp: true,
+                isSignedUp: false,
+                signUpErrorReason: ''
+            }
+        case SIGN_UP_SUCCESS:
+            return {
+                ...state,  
+                isSigningUp: false,
+                isSignedUp: true
+            }
+        case SIGN_UP_FAILURE:
+            return {
+                ...state,  
+                isSigningUp: false,
+                signUpErrorReason: action.error
             }
         default:
             return {

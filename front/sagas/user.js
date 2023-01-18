@@ -1,7 +1,7 @@
 // race, cancel, select, throttle, debounce, 등 이펙트가 자주 쓰인다.
 import { all, fork, takeLatest, takeEvery, call, put, take, delay } from 'redux-saga/effects';
-import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../reducers/user';
 import axios from 'axios';
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../reducers/user';
 
 function loadingAPI() {
     // 서버에 요청을 보내는 구문
@@ -10,7 +10,8 @@ function loadingAPI() {
 function* login() { // Generator 함수
     // 실제로 로그인을 하는 구문
     try {   // try catch로 에러를 잡아준다.
-        yield call(loadingAPI); // call은 동기 함수 호출
+        // yield call(loadingAPI); // call은 동기 함수 호출
+        yield delay(2000);
         yield put({ // put은 dispatch 동일
             type: LOG_IN_SUCCESS,
         })
@@ -18,6 +19,7 @@ function* login() { // Generator 함수
         console.error(error);
         yield put({
             type: LOG_IN_FAILURE,
+            error: e,
         })
     }
 }
@@ -27,12 +29,13 @@ function* watchLogin() {
 }
 
 function signUpAPI() {
-    return  axios.post('/login');
+    // return  axios.post('/login');
 }
 
 function* signUp() {   
     try {
-        yield call(signUpAPI);
+        // yield call(signUpAPI);
+        yield delay(2000)
         yield put({
             type: SIGN_UP_SUCCESS,
         })
@@ -40,6 +43,7 @@ function* signUp() {
         console.log(error);
         yield put({
             type: SIGN_UP_FAILURE,
+            error: e,
         })
 
     }
