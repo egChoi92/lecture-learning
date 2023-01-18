@@ -1,6 +1,7 @@
 // race, cancel, select, throttle, debounce, 등 이펙트가 자주 쓰인다.
 import { all, fork, takeLatest, takeEvery, call, put, take, delay } from 'redux-saga/effects';
-import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from '../reducers/user';
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../reducers/user';
+import axios from 'axios';
 
 function loadingAPI() {
     // 서버에 요청을 보내는 구문
@@ -22,43 +23,60 @@ function* login() { // Generator 함수
 }
 
 function* watchLogin() {
-    while (true) {
-        yield take(LOG_IN); // take는 LOG_IN 액션이 실행될 때까지 기다린다.
-        yield put({ 
-            type: LOG_IN_SUCCESS,
-        })
-    }
+    yield takeEvery(LOG_IN_REQUEST, login)
 }
 
-const HELLO_SAGA = 'HELLO_SAGA';
+function signUpAPI() {
+    return  axios.post('/login');
+}
 
+function* signUp() {   
+    try {
+        yield call(signUpAPI);
+        yield put({
+            type: SIGN_UP_SUCCESS,
+        })
+    } catch (error) {
+        console.log(error);
+        yield put({
+            type: SIGN_UP_FAILURE,
+        })
+
+    }
+
+}
+
+function* watchSignUp() {
+    yield takeEvery(SIGN_UP_REQUEST, signUp)
+}
+
+export default function* userSaga() {    
+    yield all([ // all은 배열 안의 여러 사가를 동시에 실행  
+        fork(watchLogin), // fork는 비동기 함수 호출
+        fork(watchSignUp), 
+    ])
+}
+
+/* 
+const HELLO_SAGA = 'HELLO_SAGA';
 function* hello(){   
     console.log(1);
     console.log(2);
     console.log(3);
     console.log(4);
 }
-
 function* watchHello() {
     // takeLatest는 기존에 진행 중이던 작업이 있다면 취소 처리하고, 가장 마지막으로 실행된 작업만 수행
     // takeEvery는 HELLO_SAGA 액션이 실행될 때마다 함수를 실행
     yield takeEvery(HELLO_SAGA, hello)
-}
-
-/* @note: takeEvery를 while문으로 바꾸면 아래와 같다.
-function* watchHello() {
-    while (true) {
-        yield take(HELLO_SAGA);
-        console.log(1);
-        console.log(2);
-        console.log(3);
-        console.log(4);
-    }
+    
+    // @note: takeEvery를 while문으로 바꾸면 아래와 같다.
+    // while (true) {
+    //     yield take(HELLO_SAGA);
+    //     console.log(1);
+    //     console.log(2);
+    //     console.log(3);
+    //     console.log(4);
+    // }
 }
 */
-
-export default function* userSaga() {     yield all([ // all은 배열 안의 여러 사가를 동시에 실행  
-        fork(watchLogin), // fork는 비동기 함수 호출
-        fork(watchHello), 
-    ])
-}
