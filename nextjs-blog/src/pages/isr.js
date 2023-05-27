@@ -1,5 +1,6 @@
-import SubLayout from 'components/SubLayout'
 import Head from 'next/head'
+import SubLayout from 'components/SubLayout'
+import Layout from 'components/Layout';
 
 export async function getStaticProps() {
   console.log('server')
@@ -16,5 +17,7 @@ export default function ISR({ time }) {
   )
 }
 ISR.layout = function getLayout(page) {
-  return <SubLayout>{page}</SubLayout>
+  <Layout>
+    <SubLayout>{page}</SubLayout>
+  </Layout>
 }

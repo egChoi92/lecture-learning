@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import SubLayout from 'components/SubLayout'
+import Layout from 'components/Layout';
 
 export async function getStaticProps() {
   console.log('server')
@@ -16,5 +17,9 @@ export default function SSG({ time }) {
 }
 
 SSG.layout = function getLayout(page) {
-  return <SubLayout>{page}</SubLayout>
+  return (
+    <Layout>
+      <SubLayout>{page}</SubLayout>
+    </Layout>
+  )
 }
