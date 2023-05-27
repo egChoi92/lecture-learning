@@ -1,15 +1,7 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
-export async function getStaticProps() {
-  console.log('server')
-
-  return {
-    props: { time: new Date().toISOString() },
-    revalidate: 1,
-  }
-}
-
-export default function ISR({ time }) {
+export default function Layout({ children }) {
   return (
     <div className="container">
       <Head>
@@ -17,11 +9,7 @@ export default function ISR({ time }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="title">
-          {time}
-        </h1>
-      </main>
+      <main>{children}</main>
 
       <footer>
         <a
@@ -29,12 +17,23 @@ export default function ISR({ time }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
+          Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
         </a>
       </footer>
 
-      <style jsx>{`
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -162,21 +161,6 @@ export default function ISR({ time }) {
             width: 100%;
             flex-direction: column;
           }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
         }
       `}</style>
     </div>
