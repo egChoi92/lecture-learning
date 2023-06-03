@@ -1,5 +1,9 @@
+import Layout from '@/components/layout';
+
 export default function FirstPost() {
     return ( 
-        <h1>첫번째 글</h1>
+        <Layout>
+            <h1>첫번째 글</h1>
+        </Layout>
     )
 };
