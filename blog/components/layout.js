@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
+import styles from 'components/layout.module.css';
+import utilStyles from 'styles/utils.module.css';
 import Link from 'next/link';
 
 const name = 'EG Choi';
@@ -43,7 +43,7 @@ export default function Layout({ children, home }) {
             <Link href="/">
               <Image
                 priority
-                src="/images/profile.jpg"
+                src="/images/profile.png"
                 className={utilStyles.borderCircle}
                 height={108}
                 width={108}

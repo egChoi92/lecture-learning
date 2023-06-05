@@ -1,8 +1,10 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '@/components/layout'
-import utilStyles from '@/styles/utils.module.css'
 import { useEffect, useState } from 'react'
-// import { getSortedPostsData } from '../lib/posts';
+import Head from 'next/head'
+import Layout, { siteTitle } from 'components/layout'
+import utilStyles from 'styles/utils.module.css'
+import Link from 'next/link';
+import Date from 'components/date';
+// import { getSortedPostsData } from 'lib/posts';
 
 /**
  * SSR 또는 SSG
@@ -59,11 +61,11 @@ export default function Home({allPostsData}) {  // SSR 또는 SSG 의 경우 dat
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date}></Date>
+              </small>
             </li>
           ))}
         </ul>
