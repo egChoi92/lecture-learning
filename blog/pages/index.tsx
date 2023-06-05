@@ -14,23 +14,23 @@ export async function getServerSideProps() {  // SSG 의 경우 함수명을 get
   /**
    * Node 함수(getSortedPostsData)를 import 하여 데이터 가져오기
    */  
-  // const allPostsData = getSortedPostsData();
-  // return {
-  //   props: {
-  //     allPostsData,
-  //   },
-  // }
-  
-  /**
-   * API 통신하여 데이터 가져오기
-   */
-  const res = await fetch('http://localhost:3000/api/posts');
-  const json = await res.json()
+  const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData: json,
+      allPostsData,
     },
   }
+  
+  /**
+   * API 통신하여 데이터 가져오기 (Server-Side에서는 API 요청을 하지 않는다.)
+   */
+  // const res = await fetch('http://localhost:3000/api/posts');
+  // const json = await res.json()
+  // return {
+  //   props: {
+  //     allPostsData: json,
+  //   },
+  // }
 }
 
 export default function Home({allPostsData}) {  // SSR 또는 SSG 의 경우 data를 props 로 전달한다.
