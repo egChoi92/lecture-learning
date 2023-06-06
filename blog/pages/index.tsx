@@ -4,12 +4,14 @@ import Layout, { siteTitle } from 'components/layout'
 import utilStyles from 'styles/utils.module.css'
 import Link from 'next/link';
 import Date from 'components/date';
-// import { getSortedPostsData } from 'lib/posts';
+import { getSortedPostsData } from 'lib/posts';
 
 /**
  * SSR 또는 SSG
+ * SSR 의 경우 함수명을 getServerSideProps 로 변경
+ * SSG 의 경우 함수명을 getStaticProps 로 변경
  */
-export async function getServerSideProps() {  // SSG 의 경우 함수명을 getStaticProps 로 변경
+export async function getServerSideProps() {  
 
   /**
    * Node 함수(getSortedPostsData)를 import 하여 데이터 가져오기

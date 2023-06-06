@@ -83,11 +83,11 @@ export async function getPostData(id) {
 export async function createPost({ id, title, content, date }) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const data = `---
-  title: "${title}"
-  date: "${date}"
-  ---
-  ${content}
-  `;
+title: "${title}"
+date: "${date}"
+---
+${content}
+`;
   fs.writeFileSync(fullPath, data);
 
 }

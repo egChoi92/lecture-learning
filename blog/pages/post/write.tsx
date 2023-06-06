@@ -1,10 +1,13 @@
 import Layout from "components/layout"
-import { useRef } from "react"
+import Link from "next/link";
+import { useRef, useState } from "react"
 
 export default function Write() {
   const idRef = useRef(undefined);
   const titleRef = useRef(undefined);
   const contentRef = useRef(undefined);
+  
+  const [ showPost, setShowPost ] = useState(false); 
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -24,8 +27,15 @@ export default function Write() {
           content,
         }) 
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          setShowPost(true);
+          return res.json()
+        }
+        throw new Error(res.status)
+      })
       .then(data => alert(data.message))
+      .catch(error => alert(`Request Error: ${error}`))
     }
   }
   return (
@@ -40,6 +50,7 @@ export default function Write() {
         <br />
         <input type="submit" value='Create' />
       </form>
+      {showPost && <Link href={`/posts/${idRef.current.value}`}>Created Post</Link>}
     </Layout>
   )
 }
