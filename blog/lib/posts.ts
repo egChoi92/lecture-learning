@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import { serialize } from 'next-mdx-remote/serialize';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
@@ -11,7 +12,7 @@ export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+    const id = fileName.replace(/\.md$|\.mdx$/, '');
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName);
@@ -56,27 +57,44 @@ export function getAllPostIds() {
   return fileNames.map((filename) => {
     return {
       params: {
-        id: filename.replace(/\.md$/, ''),
+        id: filename.replace(/\.md$|\.mdx$/, ''),
       }
     }
   })
 }
 
 export async function getPostData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fullMdPath = path.join(postsDirectory, `${id}.md`);
+  const mdxFile = fs.existsSync(fullMdPath);
 
-  const matterResult = matter(fileContents);
+  if (mdxFile) {
+    const fullPath = path.join(postsDirectory, `${id}.md`);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+    const matterResult = matter(fileContents);
 
-  return {
-    id,
-    contentHtml,
-    ...matterResult.data,
+    const processedContent = await remark()
+      .use(html)
+      .process(matterResult.content);
+    const contentHtml = processedContent.toString();
+
+    return {
+      id,
+      contentHtml,
+      ...matterResult.data,
+    }
+  } else {
+    const fullPath = path.join(postsDirectory, `${id}.mdx`);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    const matterResult = matter(fileContents);
+
+    const mdxSource = await serialize(matterResult.content)
+    return {
+      id,
+      mdxSource,
+      ...matterResult.data,
+    }
   }
 }
 
