@@ -1,0 +1,168 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 90vh;
+  margin: 5vh auto;
+}
+
+.App h1 { 
+  margin-bottom: 40px;
+  font-size: 24px;
+  text-align: center;
+}
+
+
+.App input, 
+.App textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.App ul {
+  list-style: none;
+}
+
+
+.App .popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.App .total {
+  margin: 20px;
+  padding: 10px 20px;
+  border: 1px solid #efefef;
+  background: #f9f9f9;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.DiaryEditor,
+.DiaryList {
+  min-width: 300px;
+  width: 50%;
+  max-width: 500px;
+  margin: 0 20px;
+  padding: 20px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+}
+
+.DiaryEditor {
+  position: relative;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.DiaryEditor > div {
+  margin-bottom: 20px;
+}
+
+.DiaryEditor textarea {
+  height: 10vw;
+}
+
+.DiaryEditor select {
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.DiaryEditor button {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.DiaryList {
+  display: flex;
+  flex-direction: column;
+}
+
+.DiaryList .notice {
+  font-size: 13px;
+}
+
+.DiaryList ul {
+  flex: 1;
+  overflow: auto;
+  margin-top: 20px;
+}
+
+.DiaryItem {
+  padding: 15px;
+  background-color: #f8f8f8;
+  text-align: left;
+}
+.DiaryItem + .DiaryItem {
+  margin-top: 20px;
+}
+.DiaryItem .head {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #aaa;
+  font-size: 13px;
+}
+.DiaryItem .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DiaryItem .date {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #777;
+}
+
+.DiaryItem .content {
+  padding-bottom: 20px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-wrapper button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 2px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.red-button {
+  background-color: rgb(255, 205, 205);
+  color: #333;
+}
+.black-button {
+  background-color: #333;
+  color: #fff;
+}
+.white-button {
+  border: 1px solid #000;
+  background-color: #fff;
+}
